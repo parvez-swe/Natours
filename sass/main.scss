@@ -1,0 +1,199 @@
+/*
+COLORS:
+
+Light green: #7ed56f
+Medium green: #55c57a
+Dark green: #28b485
+
+*/
+
+$color-primary: #55c57a;
+$color-primary-light: #7ed56f;
+$color-primary-dark: #28b485;
+$color-grey-dark: #777;
+$color-white: #fff;
+$color-balck: #000;
+
+* {
+  margin: 0;
+  padding: 0; /*basic reset with universal selector.. */
+  box-sizing: border-box;
+}
+body {
+  /*project-wide font definition*/
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.7;
+  color: $color-grey-dark;
+  padding: 20px;
+}
+
+.header {
+  /* How to parts of element using clip-path */
+  height: 95vh;
+  background-image: linear-gradient(
+      to right bottom,
+      rgba($color-primary-light, 0.8),
+      rgba($color-primary-light, 0.8)
+    ),
+    url(../img/hero.jpg);
+  background-size: cover;
+  background-position: top;
+  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+
+  /* logo and heading setup */
+  &__logo-box {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+  }
+  &__logo {
+    height: 45px;
+    /* width will automatic set by browser */
+  }
+
+  &__text-box {
+    position: absolute;
+    top: 40%; /* it related to parent element*/
+    left: 50%; /* it related to parent element */
+    transform: translate(-50%, -50%); /* it related to it self */
+    text-align: center; /*button will be in the center*/
+  }
+}
+
+.heading-primary {
+  color: $color-white;
+  text-transform: uppercase;
+  margin-bottom: 60px; /*for make space between button and text*/
+
+  backface-visibility: hidden; /*prevent the effect heading text animation */
+
+  &-main {
+    display: block; /* for they have their own line*/
+    font-size: 60px;
+    font-weight: 400;
+    letter-spacing: 35px;
+
+    animation-name: moveInLeft; /*decleare the @key animation name... */
+    animation-timing-function: ease-out; /*start faster then slower... it accelarate the animation */
+    animation-duration: 1s; /*how long time it will took*/
+
+    /*    animation-delay: 2s;   /*after this time animation will run */
+    /*   animation-iteration-count: 3; /* how much time the animation will execute...*/
+  }
+  &-sub {
+    display: block;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 17.4px;
+
+    animation: moveInRight 1s ease-out;
+  }
+}
+
+/*How to create CSS animations using @keyframes and the animation */
+@keyframes moveInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px); /*The direction goes from left to right*/
+    /*positive value means it goes to left, negative value goes to right */
+  }
+
+  80% {
+    transform: translateX(10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0); /* it stay its own place */
+  }
+}
+
+@keyframes moveInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(100px); /*The direction goes from left to right*/
+    /*positive value means it goes to left, negative value goes to right */
+  }
+
+  80% {
+    transform: translateX(-10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0); /* it stay its own place */
+  }
+}
+
+@keyframes moveInBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Building a complex animated button
+  what pseudo-element and pseudo-colasses are;
+  How and why to use the ::after pseudo-element ;
+  How to create a creative hover animation effect using the transition property*/
+.btn {
+  &:link,
+  &:visited {
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 15px 40px;
+    display: inline-block;
+    border-radius: 100px;
+    position: relative;
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 10px rgba($color-balck, 0.2);
+  }
+  &:active {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 5px rgba($color-balck, 0.2);
+  }
+  &-white {
+    background-color: $color-white;
+    color: $color-grey-dark;
+  }
+
+  /*building animated button part 2*/
+
+  &::after {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    border-radius: 100px;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: all 0.4s;
+  }
+
+  &-white::after {
+    background-color: $color-white;
+  }
+
+  &:hover::after {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+
+  &-animated {
+    animation: moveInBottom 0.5s ease-out 0.75s; /*animation name,animation duration, timing func (accelaration),animation delay*/
+    animation-fill-mode: backwards;
+  }
+}
