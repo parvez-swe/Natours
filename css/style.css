@@ -39,6 +39,13 @@ body{                         /*project-wide font definition*/
     /* width will automatic set by browser */
 }
 
+.text-box{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
 .heading-primary{
     color: #fff;
     text-transform: uppercase;
@@ -56,3 +63,4 @@ body{                         /*project-wide font definition*/
     font-weight: 700;
     letter-spacing: 17.4px;
 }
+
